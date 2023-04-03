@@ -1,9 +1,10 @@
-package com.zhigu.parser.impl.wust;
+package com.zhigu.parser.impl.wust.undergraduate;
 
 import com.zhigu.entity.Constants;
 import com.zhigu.entity.HandleType;
-import com.zhigu.entity.SchoolContext;
+import com.zhigu.entity.ProcessContext;
 import com.zhigu.entity.Student;
+import com.zhigu.entity.param.StudentInfoParam;
 import com.zhigu.parser.AbstractHandleStudentInfo;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
  * 2023/04/02 10:30
  */
 @Component
-public class WustHandleStudentInfoImpl extends AbstractHandleStudentInfo {
+public class WustHandleStudentInfoImpl extends AbstractHandleStudentInfo<StudentInfoParam> {
 
 
     public String getSchoolCode() {
@@ -21,25 +22,25 @@ public class WustHandleStudentInfoImpl extends AbstractHandleStudentInfo {
 
     @Override
     public HandleType getHandleType() {
-        return HandleType.HANDLE_STUDENT_INFO;
+        return HandleType.UNDERGRADUATE_HANDLE_STUDENT_INFO;
     }
 
     /**
      * 提供给不同学校实现获取学生信息的json/xml/html数据的方法
      *
-     * @param schoolContext
+     * @param processContext
      * @return
      * @author 之古 2023-04-02 11:14
      */
     @Override
-    public String preObtainProcess(SchoolContext schoolContext) {
+    public String preObtainProcess(ProcessContext processContext, StudentInfoParam param) {
         // 根据学校code,获取studentInfoStr并return
         System.out.println("wust HANDLE_STUDENT_INFO preObtainProcess");
         return "studentStr";
     }
 
     @Override
-    public Student preParseProcess(SchoolContext schoolContext) {
+    public Student preParseProcess(ProcessContext processContext, StudentInfoParam param) {
         // 根据html/json解析生成student对象并return
         System.out.println("wust HANDLE_STUDENT_INFO preParseProcess");
         Student student = new Student();

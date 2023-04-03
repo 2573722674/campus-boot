@@ -1,13 +1,14 @@
 package com.zhigu.entity;
 
 import lombok.Data;
+import org.springframework.web.servlet.tags.Param;
 
 /**
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 10:01
  */
 @Data
-public class SchoolContext {
+public class ProcessContext{
     // 学校编码
     private String schoolCode;
 
@@ -18,7 +19,7 @@ public class SchoolContext {
 
     private Object result;
 
-    public SchoolContext(String schoolCode, HandleType handleType) {
+    public ProcessContext(String schoolCode, HandleType handleType) {
         this.schoolCode = schoolCode;
         this.handleType = handleType;
     }

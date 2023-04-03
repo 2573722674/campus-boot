@@ -1,23 +1,28 @@
 package com.zhigu.parser;
 
+import com.alibaba.fastjson.JSON;
 import com.zhigu.entity.ScheduleParseResult;
-import com.zhigu.entity.SchoolContext;
-import com.zhigu.entity.Student;
+import com.zhigu.entity.ProcessContext;
 
 /**
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 11:25
  */
-public abstract class AbstractHandleSchedule implements HandleProcess{
+public abstract class AbstractHandleSchedule<T> implements HandleProcess<T> {
 
-    public void obtainProcess(SchoolContext schoolContext) {
-        String studentInfoStr = this.preObtainProcess(schoolContext);
-        schoolContext.setJsonStr(studentInfoStr);
+    private Class<T> tClass;
+
+    public void obtainProcess(ProcessContext processContext, String paramJson) {
+        T param = JSON.parseObject(paramJson, this.tClass);
+
+        String studentInfoStr = this.preObtainProcess(processContext, param);
+        processContext.setJsonStr(studentInfoStr);
     }
 
-    public void parseProcess(SchoolContext schoolContext) {
-        ScheduleParseResult scheduleParseResult = this.preParseProcess(schoolContext);
-        schoolContext.setResult(scheduleParseResult);
+    public void parseProcess(ProcessContext processContext, String paramJson) {
+        T param = JSON.parseObject(paramJson, this.tClass);
+        ScheduleParseResult scheduleParseResult = this.preParseProcess(processContext, param);
+        processContext.setResult(scheduleParseResult);
         // 可执行入库操作
 
     }
@@ -28,9 +33,9 @@ public abstract class AbstractHandleSchedule implements HandleProcess{
      * @return
      * @author 之古 2023-04-02 11:14
      */
-    public abstract String preObtainProcess(SchoolContext schoolContext);
+    public abstract String preObtainProcess(ProcessContext processContext, T param);
 
 
-    public abstract ScheduleParseResult preParseProcess(SchoolContext schoolContext);
+    public abstract ScheduleParseResult preParseProcess(ProcessContext processContext, T param);
 
 }

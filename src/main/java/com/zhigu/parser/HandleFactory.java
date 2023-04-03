@@ -1,9 +1,8 @@
 package com.zhigu.parser;
 
 import com.zhigu.entity.HandleType;
-import com.zhigu.entity.SchoolContext;
+import com.zhigu.entity.ProcessContext;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -39,10 +38,12 @@ public class HandleFactory {
                 }
             });
         }
+
     }
 
 
-    public HandleProcess getHandleProcess(SchoolContext context) {
+
+    public HandleProcess getHandleProcess(ProcessContext context) {
         return this.handleProcessMap.get(context.getServiceKey());
     }
 

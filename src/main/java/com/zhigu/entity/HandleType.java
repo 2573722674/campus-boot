@@ -7,9 +7,15 @@ package com.zhigu.entity;
  * 2023/04/02 10:02
  */
 public enum HandleType {
-    HANDLE_STUDENT_INFO("获取学生信息"),
-    HANDLE_SCHEDULE_INFO("获取课表信息"),
-    HANDLE_TRANSCRIPT_INFO("获取成绩信息");
+    UNDERGRADUATE_HANDLE_STUDENT_INFO("本科生处理学生信息"),
+    UNDERGRADUATE_HANDLE_SCHEDULE_INFO("本科生处理课表信息"),
+    UNDERGRADUATE_HANDLE_TRANSCRIPT_INFO("本科生处理成绩信息"),
+
+    POSTGRADUATE_HANDLE_STUDENT_INFO("研究生处理学生信息"),
+    POSTGRADUATE_HANDLE_SCHEDULE_INFO("研究生处理课表信息"),
+    POSTGRADUATE_HANDLE_TRANSCRIPT_INFO("研究生处理成绩信息");
+
+
     private String mean;
 
     HandleType(String mean) {

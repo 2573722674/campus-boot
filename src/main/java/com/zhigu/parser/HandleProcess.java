@@ -1,7 +1,9 @@
 package com.zhigu.parser;
 
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import com.zhigu.entity.HandleType;
-import com.zhigu.entity.SchoolContext;
+import com.zhigu.entity.ProcessContext;
 import org.springframework.util.StringUtils;
 
 /**
@@ -10,7 +12,8 @@ import org.springframework.util.StringUtils;
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 10:14
  */
-public interface HandleProcess {
+public interface HandleProcess<T> {
+
 
     default String getServiceKey() {
         return this.getSchoolCode() + "#" + getHandleType();
@@ -20,15 +23,17 @@ public interface HandleProcess {
 
     HandleType getHandleType();
 
-    default void process(SchoolContext schoolContext) {
-        this.obtainProcess(schoolContext);
-        if (!StringUtils.isEmpty(schoolContext.getJsonStr())) {
-            this.parseProcess(schoolContext);
+    default void process(ProcessContext processContext, String paramJson) {
+        this.obtainProcess(processContext, paramJson);
+        if (!StringUtils.isEmpty(processContext.getJsonStr())) {
+            this.parseProcess(processContext, paramJson);
         }
     }
 
 
-    void obtainProcess(SchoolContext schoolContext);
+    //获取处理
+    public abstract void obtainProcess(ProcessContext processContext, String paramJson);
 
-    void parseProcess(SchoolContext schoolContext);
+    //解析处理
+    public abstract void parseProcess(ProcessContext processContext, String paramJson);
 }

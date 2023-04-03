@@ -1,6 +1,6 @@
 package com.zhigu.parser;
 
-import com.zhigu.entity.SchoolContext;
+import com.zhigu.entity.ProcessContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,32 +21,32 @@ public class HandleEngine {
      * @author 之古 2023-04-02 12:01
      */
 
-    public void process(SchoolContext schoolContext) {
-        HandleProcess handleProcess = handleFactory.getHandleProcess(schoolContext);
+    public void process(ProcessContext processContext, String paramJson) {
+        HandleProcess handleProcess = handleFactory.getHandleProcess(processContext);
         if (handleProcess == null) {
             System.out.println("没有相应的处理规则");
             return;
         }
-        handleProcess.process(schoolContext);
+        handleProcess.process(processContext, paramJson);
     }
 
 
-    public void obtainProcess(SchoolContext schoolContext){
-        HandleProcess handleProcess = handleFactory.getHandleProcess(schoolContext);
+    public void obtainProcess(ProcessContext processContext, String paramJson) {
+        HandleProcess handleProcess = handleFactory.getHandleProcess(processContext);
         if (handleProcess == null) {
             System.out.println("没有相应的处理规则");
             return;
         }
-        handleProcess.obtainProcess(schoolContext);
+        handleProcess.obtainProcess(processContext, paramJson);
     }
 
-    public void parseProcess(SchoolContext schoolContext){
-        HandleProcess handleProcess = handleFactory.getHandleProcess(schoolContext);
+    public void parseProcess(ProcessContext processContext, String paramJson) {
+        HandleProcess handleProcess = handleFactory.getHandleProcess(processContext);
         if (handleProcess == null) {
             System.out.println("没有相应的处理规则");
             return;
         }
-        handleProcess.parseProcess(schoolContext);
+        handleProcess.parseProcess(processContext, paramJson);
     }
 
 
