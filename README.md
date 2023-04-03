@@ -1,1 +1,1 @@
-# campus-core
+# campus-boot

@@ -2,12 +2,13 @@ package com.zhigu.parser;
 
 import com.zhigu.entity.HandleType;
 import com.zhigu.entity.ProcessContext;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
+import com.zhigu.parser.impl.wpue.undergraduate.WpueHandleScheduleImpl;
+import com.zhigu.parser.impl.wpue.undergraduate.WpueHandleStudentInfoImpl;
+import com.zhigu.parser.impl.wust.undergraduate.WustHandleScheduleImpl;
+import com.zhigu.parser.impl.wust.undergraduate.WustHandleStudentInfoImpl;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,31 +17,35 @@ import java.util.Map;
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 11:23
  */
-@Component
+
 public class HandleFactory {
 
 
-    private final List<HandleProcess> handleProcessList;
+    private static final Map<String, HandleProcess> handleProcessMap = new HashMap<>();
 
-    private final Map<String, HandleProcess> handleProcessMap = new HashMap<>();
 
-    public HandleFactory(ObjectProvider<List<HandleProcess>> listObjectProvider) {
-        this.handleProcessList = listObjectProvider.getIfAvailable();
+    static {
+
+        List<HandleProcess> handleProcessList = new ArrayList<>();
+        // 手动注入武工程
+        handleProcessList.add(new WpueHandleScheduleImpl());
+        handleProcessList.add(new WpueHandleStudentInfoImpl());
+
+
+        // 手动注入武科大
+        handleProcessList.add(new WustHandleStudentInfoImpl());
+        handleProcessList.add(new WustHandleScheduleImpl());
+
+
+        handleProcessList.forEach(processService -> {
+            String serviceKey = processService.getServiceKey();
+            if (serviceKey != null) {
+                handleProcessMap.put(serviceKey, processService);
+            }
+        });
+
+
     }
-
-    @PostConstruct
-    public void init() {
-        if (!CollectionUtils.isEmpty(this.handleProcessList)) {
-            this.handleProcessList.forEach(processService -> {
-                String serviceKey = processService.getServiceKey();
-                if (!StringUtils.isEmpty(serviceKey)) {
-                    this.handleProcessMap.put(serviceKey, processService);
-                }
-            });
-        }
-
-    }
-
 
 
     public HandleProcess getHandleProcess(ProcessContext context) {

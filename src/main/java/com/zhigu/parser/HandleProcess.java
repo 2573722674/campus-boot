@@ -2,7 +2,6 @@ package com.zhigu.parser;
 
 import com.zhigu.entity.HandleType;
 import com.zhigu.entity.ProcessContext;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -26,7 +25,7 @@ public interface HandleProcess<T> {
 
     default void process(ProcessContext processContext, String paramJson) {
         this.obtainProcess(processContext, paramJson);
-        if (!StringUtils.isEmpty(processContext.getJsonStr())) {
+        if (processContext.getJsonStr() != null) {
             this.parseProcess(processContext, paramJson);
         }
     }
@@ -42,10 +41,10 @@ public interface HandleProcess<T> {
     /**
      * 获取T的泛型class
      *
-     * @author 之古 2023-04-03 12:56
      * @return
+     * @author 之古 2023-04-03 12:56
      */
-    default Class<T> getTClass(){
+    default Class<T> getTClass() {
         Type[] types = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
         return (Class<T>) types[0];
     }

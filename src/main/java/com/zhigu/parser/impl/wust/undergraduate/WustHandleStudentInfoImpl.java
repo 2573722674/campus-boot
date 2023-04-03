@@ -6,13 +6,12 @@ import com.zhigu.entity.ProcessContext;
 import com.zhigu.entity.Student;
 import com.zhigu.entity.param.StudentInfoParam;
 import com.zhigu.parser.AbstractHandleStudentInfo;
-import org.springframework.stereotype.Component;
 
 /**
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 10:30
  */
-@Component
+
 public class WustHandleStudentInfoImpl extends AbstractHandleStudentInfo<StudentInfoParam> {
 
 
