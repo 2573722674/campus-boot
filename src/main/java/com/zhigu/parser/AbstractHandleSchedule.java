@@ -4,23 +4,24 @@ import com.alibaba.fastjson.JSON;
 import com.zhigu.entity.ScheduleParseResult;
 import com.zhigu.entity.ProcessContext;
 
+
+
 /**
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 11:25
  */
 public abstract class AbstractHandleSchedule<T> implements HandleProcess<T> {
 
-    private Class<T> tClass;
-
     public void obtainProcess(ProcessContext processContext, String paramJson) {
-        T param = JSON.parseObject(paramJson, this.tClass);
+        T param = JSON.parseObject(paramJson, getTClass());
 
         String studentInfoStr = this.preObtainProcess(processContext, param);
         processContext.setJsonStr(studentInfoStr);
     }
 
     public void parseProcess(ProcessContext processContext, String paramJson) {
-        T param = JSON.parseObject(paramJson, this.tClass);
+
+        T param = JSON.parseObject(paramJson, getTClass());
         ScheduleParseResult scheduleParseResult = this.preParseProcess(processContext, param);
         processContext.setResult(scheduleParseResult);
         // 可执行入库操作

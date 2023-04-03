@@ -9,17 +9,17 @@ import com.zhigu.entity.Student;
  * 2023/04/02 10:20
  */
 public abstract class AbstractHandleStudentInfo<T> implements HandleProcess<T> {
-    private Class<T> tClass;
+
 
     public void obtainProcess(ProcessContext processContext, String paramJson) {
-        T param = JSON.parseObject(paramJson, this.tClass);
+        T param = JSON.parseObject(paramJson, getTClass());
 
         String studentInfoStr = this.preObtainProcess(processContext, param);
         processContext.setJsonStr(studentInfoStr);
     }
 
     public void parseProcess(ProcessContext processContext, String paramJson) {
-        T param = JSON.parseObject(paramJson, this.tClass);
+        T param = JSON.parseObject(paramJson, getTClass());
 
         Student student = this.preParseProcess(processContext, param);
         processContext.setResult(student);

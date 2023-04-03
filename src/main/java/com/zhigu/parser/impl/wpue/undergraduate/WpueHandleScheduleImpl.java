@@ -7,18 +7,17 @@ import com.zhigu.entity.ProcessContext;
 import com.zhigu.entity.param.ScheduleParam;
 import com.zhigu.parser.AbstractHandleSchedule;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.tags.Param;
 
 /**
  * @author 曹志恒 zhiheng.cao@hand-china.com
  * 2023/04/02 10:30
  */
 @Component
-public class WpueustHandleScheduleImpl extends AbstractHandleSchedule<ScheduleParam> {
+public class WpueHandleScheduleImpl extends AbstractHandleSchedule<ScheduleParam> {
 
 
     public String getSchoolCode() {
-        return Constants.SchoolCode.WUST;
+        return Constants.SchoolCode.WPUE;
     }
 
     @Override

@@ -6,6 +6,9 @@ import com.zhigu.entity.HandleType;
 import com.zhigu.entity.ProcessContext;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 /**
  * 定义处理最顶层接口
  *
@@ -32,8 +35,22 @@ public interface HandleProcess<T> {
 
 
     //获取处理
-    public abstract void obtainProcess(ProcessContext processContext, String paramJson);
+    void obtainProcess(ProcessContext processContext, String paramJson);
 
     //解析处理
-    public abstract void parseProcess(ProcessContext processContext, String paramJson);
+    void parseProcess(ProcessContext processContext, String paramJson);
+
+
+    /**
+     * 获取T的泛型
+     *
+     * @author 之古 2023-04-03 12:56
+     * @return
+     */
+    default Class<T> getTClass(){
+        Type[] types = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
+        return (Class<T>) types[0];
+    }
+
+
 }

@@ -18,7 +18,7 @@ class CampusCoreApplicationTests {
     @Test
     public void test1() {
         ProcessContext processContext = new ProcessContext("wust", HandleType.UNDERGRADUATE_HANDLE_SCHEDULE_INFO);
-        handleEngine.process(processContext, "{param:ssss}");
+        handleEngine.process(processContext, "{\"semester\":\"2022-1\",\"studentId\":\"2018\"}");
         ScheduleParseResult result = (ScheduleParseResult) processContext.getResult();
         System.out.println(JSONUtil.toJsonStr(result));
     }

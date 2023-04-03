@@ -1,5 +1,6 @@
 package com.zhigu.parser.impl.wust.undergraduate;
 
+import cn.hutool.json.JSONUtil;
 import com.zhigu.entity.*;
 import com.zhigu.entity.param.ScheduleParam;
 import com.zhigu.parser.AbstractHandleSchedule;
@@ -41,6 +42,7 @@ public class WustHandleScheduleImpl extends AbstractHandleSchedule<ScheduleParam
     public ScheduleParseResult preParseProcess(ProcessContext processContext, ScheduleParam param) {
         // 根据html/json解析生成student对象并return
         System.out.println("wust HANDLE_SCHEDULE_INFO preParseProcess");
+        System.out.println(JSONUtil.toJsonStr(param));
 
         return new ScheduleParseResult(null, 0);
     }
