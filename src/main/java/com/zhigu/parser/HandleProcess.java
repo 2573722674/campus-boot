@@ -1,7 +1,5 @@
 package com.zhigu.parser;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
 import com.zhigu.entity.HandleType;
 import com.zhigu.entity.ProcessContext;
 import org.springframework.util.StringUtils;
@@ -42,7 +40,7 @@ public interface HandleProcess<T> {
 
 
     /**
-     * 获取T的泛型
+     * 获取T的泛型class
      *
      * @author 之古 2023-04-03 12:56
      * @return
