@@ -7,7 +7,7 @@ import com.zhigu.parser.impl.wpue.undergraduate.WpueHandleStudentInfoImpl;
 import com.zhigu.parser.impl.wust.undergraduate.WustHandleScheduleImpl;
 import com.zhigu.parser.impl.wust.undergraduate.WustHandleStudentInfoImpl;
 
-import javax.annotation.PostConstruct;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
